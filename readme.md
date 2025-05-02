@@ -3,20 +3,20 @@
 EvalScan aims to let you quickly understand agent behaviour and locate task bugs through automated scans of your Inspect LLM agent evaluation transcripts.
 
 ## Features
-* Run scans over big collections of evaluation logs - `evalscan`'s currently designed to work with DuckDB databases generate by `evaldb`
-* Visualize agent behaviours and task bugs such as
+* Scan big collections of Inspect logs - `evalscan`'s currently designed to work with DuckDB databases generate by `evaldb`
+* Visualize and tabulate agent behaviours and task bugs such as
     * Tool call sequences
     * Length of reasoning messages
     * Refusals and requests for user input
-* Automatically generate a report visualising and summarising scan results 
+* Generate reports of scan results 
 
-## Installation
+## Install
 
 ```
 pip install TODO
 ```
 
-## Usage
+## Use
 
 **1. Index**: Index your evaluation logs with `evaldb`.
 

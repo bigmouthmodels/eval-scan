@@ -1,6 +1,6 @@
 # ❀ EvalScan
 
-EvalScan aims to let you quickly understand agent behaviour and locate task bugs through automated scans of your Inspect LLM agent evaluation transcripts.
+EvalScan aims to let you quickly understand agent behaviour and locate task bugs via automated scans of your Inspect LLM agent evaluation transcripts.
 
 ## Features
 * Scan big collections of Inspect logs - `evalscan`'s currently designed to work with DuckDB databases generate by `evaldb`
@@ -32,9 +32,11 @@ evalscan report <db_uri>
 ```
 
 ## Target Use-cases
-* AISI's testing exercises:
+
+AISI's testing exercises:
     * Quantifying agent behaviours in AISI's CAST evaluations
     * Measuring quality issues in CAST results during AISI's testing exercises
-* AISI's CI/CD pipelines:
+
+AISI's CI/CD pipelines:
     * Automated reporting for evaluation suites
     * Automated reporting for agent scaffold

@@ -1,5 +1,5 @@
 [project]
-name = "aisi-eval-scan"
+name = "evalscan"
 version = "0.1.0"
 description = "Scans for evaluations."
 readme = "README.md"
@@ -7,18 +7,26 @@ requires-python = ">=3.12"
 dependencies = [
     "aisitools",
     "anthropic>=0.49.0",
+    "click>=8.1.8",
     "evaldb",
     "huggingface-hub>=0.30.2",
+    "humanize>=4.12.3",
     "inspect-ai>=0.3.90",
     "inspect-evals",
+    "jupyterlab>=4.4.1",
     "matplotlib>=3.10.1",
+    "numpy>=2.2.5",
     "openai>=1.75.0",
     "pandas>=2.2.3",
     "plotly[express]>=6.0.1",
-    "quarto-cli>=1.7.29",
 ]
 
 [tool.uv.sources]
 inspect-evals = { git = "https://github.com/UKGovernmentBEIS/inspect_evals" }
 aisitools = { git = "ssh://git@github.com/AI-Safety-Institute/aisi-inspect-tools.git" }
 evaldb = { git = "ssh://git@github.com/AI-Safety-Institute/proto_evaldb.git" }
+
+[project.scripts]
+# This creates a command called "your-command" that calls the "main" function 
+# from the "your_package.cli" module
+evalscan = "evalscan.cli:main"

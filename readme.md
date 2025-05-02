@@ -1,7 +1,7 @@
 Receives a list of eval logs in a .txt file as input, outputs a markdown report providing an analysis of those logs.
 
 ```
-uvx run aisi-eval-qa --log-dir ./path/to/log/dir --output-name cybench-100
+uvx run evalscan --log-dir ./path/to/log/dir --output-name cybench-100
 ```
 
 Target use-cases:

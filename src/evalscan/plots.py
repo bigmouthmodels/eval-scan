@@ -1,5 +1,5 @@
-from uuid import uuid4
 from pathlib import Path
+from uuid import uuid4
 
 import matplotlib
 import pandas as pd
@@ -24,7 +24,7 @@ def lasagne_stacked_plotly(
     # TODO: infer these from the number of rows
     width: int = 1400
     height: int = 700
-    
+
     # Data is in data
     max_index = data[index_col].max()
     data.sort_values(by=[task_col, "index"])
@@ -130,11 +130,11 @@ def lasagne_stacked_continuous_plotly(
     model_col: str = "model",
     task_col: str = "task_name",
     yticklabels: bool = True,
-    legend: bool = True
+    legend: bool = True,
 ):
     width: int = 1400
     height: int = 700
-    
+
     # Data is in data
     max_index = data[index_col].max()
     data.sort_values(by=[task_col, "index"])
@@ -231,10 +231,11 @@ def lasagne_stacked_continuous_plotly(
         width=width,
         height=height,
     )
-    
+
     fp = f"{dst_dir}/{uuid4()}.svg"
     fig.write_image(fp)
     return Path(fp)
+
 
 import matplotlib.patches as patches
 import matplotlib.pyplot as plt
@@ -243,6 +244,7 @@ from matplotlib.patches import Patch
 
 # warning: garbage code
 grade_to_emoji = {"U": "$\\circ$", "C": "$\\checkmark$", "I": "$\\times$"}
+
 
 def lasagne_stacked_cont(
     data: pd.DataFrame,

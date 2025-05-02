@@ -1,10 +1,11 @@
-# EvalScan Report
+# EvalScan Report (impact-whom-dinner)
 
 ---
 
 > [!WARNING]
 > EvalScan is a new tool that is being actively developed. It hasn't been comprehensively tested, so you should interpret results cautiously.
-Report generated: 2025-05-02 14:05:15 UTC
+
+Report generated: 2025-05-02 14:05:20 UTC
 
 Source database: /home/ubuntu/los-alamos/cybench-100-t0.db
 
@@ -14,11 +15,11 @@ No. models: 3
 
 No. tasks: 40
 
-![](./2bd120b5-62b2-431c-b514-b836d12aee6c.svg)
+![](./15f186af-c549-4226-b9be-c4bce793129d.svg)
 
-![](./71f5248d-f8bd-4c95-b06e-d49f2e4213e3.svg)
+![](./83205281-2be7-4b58-a824-742c199f0ff4.svg)
 
-![](./069f26f5-9d7b-405e-850f-059453edf008.svg)
+![](./c41c5ffa-c018-459e-8cd9-6eec9956366f.svg)
 
 ---
 

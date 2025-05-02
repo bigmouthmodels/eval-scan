@@ -9,6 +9,9 @@ import click
 import humanize
 import pandas as pd
 import pytz
+from faker import Faker
+
+fake = Faker()
 
 from evalscan.index import load_data
 from evalscan.plots import lasagne_stacked_plotly
@@ -90,9 +93,10 @@ def main(db_uri):
         md_lines = []
         md_lines.extend(
             [
-                "# EvalScan Report",
+                f"# EvalScan Report ({'-'.join(fake.words())})",
                 "---",
-                "> [!WARNING]\n> EvalScan is a new tool that is being actively developed. It hasn't been comprehensively tested, so you should interpret results cautiously.\n"
+                "> [!WARNING]\n> EvalScan is a new tool that is being actively developed. It hasn't been comprehensively tested, so you should interpret results cautiously."
+                "",
                 f"Report generated: {raw_timestamp.strftime('%Y-%m-%d %H:%m:%S %Z')}",
                 f"Source database: {db_uri}",
                 f"No. samples: {get_n_samples(data)}",

@@ -1,7 +1,8 @@
+import os
 import shutil
 import tempfile
-from pathlib import Path
 from datetime import datetime, timedelta
+from pathlib import Path
 from time import time
 
 import click
@@ -10,7 +11,7 @@ import pandas as pd
 import pytz
 
 from evalscan.index import load_data
-from evalscan.plots import lasagne_stacked_plotly, lasagne_stacked_continuous_plotly
+from evalscan.plots import lasagne_stacked_plotly
 
 # Scope: reporting on closed automated agent evals
 
@@ -60,14 +61,14 @@ def get_plots(data: pd.DataFrame, temp_dir: str) -> list[str]:
             fp = lasagne_stacked_plotly(
                 data,
                 model,
-                dst_dir = temp_dir,
-                index_col = fn_index,
-                score_col = fn_score,
-                grade_col = fn_grade,
-                model_col = fn_model,
-                task_col = fn_task_name,
-                yticklabels = True,
-                legend = True,
+                dst_dir=temp_dir,
+                index_col=fn_index,
+                score_col=fn_score,
+                grade_col=fn_grade,
+                model_col=fn_model,
+                task_col=fn_task_name,
+                yticklabels=True,
+                legend=True,
             )
             md_lines.append(f"![](./{fp.name})")
         # for fn_score in cont_score_cols:
@@ -84,7 +85,7 @@ def get_plots(data: pd.DataFrame, temp_dir: str) -> list[str]:
         #         legend = True
         #     )
         #     md_lines.append(f"![](./{fp.name})")
-            
+
     return md_lines
 
 
@@ -103,7 +104,7 @@ def main(db_uri):
             [
                 "# EvalScan Report",
                 "---",
-                "> [!WARNING]\n> EvalScan is a new tool that is being actively developed. It hasn't been comprehensively tested, so you should interpret results cautiously."
+                "> [!WARNING]\n> EvalScan is a new tool that is being actively developed. It hasn't been comprehensively tested, so you should interpret results cautiously.\n"
                 f"Report generated: {raw_timestamp.strftime('%Y-%m-%d %H:%m:%S %Z')}",
                 f"Source database: {db_uri}",
                 f"No. samples: {get_n_samples(data)}",
@@ -122,4 +123,13 @@ def main(db_uri):
                 print(line, file=md_file)
                 print("", file=md_file)
 
-        shutil.make_archive(f"evalscan-report-{timestamp}", "zip", temp_dir, Path(temp_dir).parent)
+        # Move the entire contents into a directory so the report unzips neatly for users
+        os.makedirs(f"{temp_dir}/evalscan-report-{timestamp}")
+        for filepath in list(Path(temp_dir).rglob("*")):
+            if filepath.is_file():
+                shutil.move(
+                    filepath,
+                    filepath.parent / f"evalscan-report-{timestamp}" / filepath.name,
+                )
+
+        shutil.make_archive(f"evalscan-report-{timestamp}", "zip", f"{temp_dir}")

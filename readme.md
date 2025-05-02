@@ -8,7 +8,7 @@ EvalScan aims to let you quickly understand agent behaviour and locate task bugs
     * Tool call sequences
     * Length of reasoning messages
     * Refusals and requests for user input
-* Generate reports of scan results 
+* Generate reports of scan results - see `/examples` for example reports
 
 ## Install
 
@@ -31,4 +31,10 @@ This creates a separate scores table in your database.
 evalscan report <db_uri>
 ```
 
-
+## Target Use-cases
+* AISI's testing exercises:
+    * Quantifying agent behaviours in AISI's CAST evaluations
+    * Measuring quality issues in CAST results during AISI's testing exercises
+* AISI's CI/CD pipelines:
+    * Automated reporting for evaluation suites
+    * Automated reporting for agent scaffold

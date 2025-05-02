@@ -1,6 +1,8 @@
 import asyncio
+
 import pandas as pd
 from tqdm.asyncio import tqdm_asyncio
+
 
 def apply_async(df, async_fn) -> pd.Series:
     async def run_all():
@@ -20,6 +22,7 @@ async def awake_scorer(row: pd.Series) -> str:  # Test scorer
 
 
 from inspect_ai.model import GenerateConfig, get_model
+
 
 def is_reasoning_message(row: pd.Series):
     return (row["role"] == "assistant") and (row["tool_call"] == "Not a tool call")

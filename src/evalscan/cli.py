@@ -13,18 +13,6 @@ import pytz
 from evalscan.index import load_data
 from evalscan.plots import lasagne_stacked_plotly
 
-# Scope: reporting on closed automated agent evals
-
-# Input:
-# - a results database
-# - a specification of the plots to generate
-# Output: a markdown file and supporting plot files
-# - list of entries to write to markdown file
-
-# Start with the lasagne plots
-
-# Assumptions about the interface to the data?
-
 # Field names
 fn_sample = "tidy_sample_uuid"
 fn_log = "raw_log_uuid"

@@ -1,14 +1,30 @@
-Receives a list of eval logs in a .txt file as input, outputs a markdown report providing an analysis of those logs.
+# EvalScan
+
+EvalScan aims to let you quickly understand agent behaviour and locate task bugs by providing automated scans of Inspect LLM agent evaluation transcripts.
+
+## Features
+* Run scans over big collections of evaluation logs - `evalscan`'s currently designed to work with DuckDB databases generate by `evaldb`
+* Detect agent behaviours and task bugs such as 
+* Automatically generate a report visualising and summarising scan results 
+
+## Installation
 
 ```
-uvx run evalscan --log-dir ./path/to/log/dir --output-name cybench-100
+pip install TODO
 ```
 
-Target use-cases:
-* Understanding agent behaviour
-* Detecting agent failures
-* Finding task bugs
+## Usage
 
-What's the use-case?
-* Lots of evaluation logs from multiple models and tasks
-* Want to understand all the samples 
+**1. Index**: Index your evaluation logs by running TODO
+
+**2. Scan**: Scan your evaluation results with the default probe library:
+```
+evalscan scan <db_uri>
+```
+
+**3. Report**: Compile a markdown report summarizing and visualizing scan results via
+```
+evalscan report <db_uri>
+```
+
+

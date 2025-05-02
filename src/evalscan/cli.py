@@ -93,15 +93,15 @@ def main(db_uri):
         md_lines = []
         md_lines.extend(
             [
-                f"# EvalScan Report ({'-'.join(fake.words())})",
+                f"# EvalScan Report (`{'-'.join(fake.words())}`)",
                 "---",
                 "> [!WARNING]\n> EvalScan is a new tool that is being actively developed. It hasn't been comprehensively tested, so you should interpret results cautiously."
                 "",
-                f"Report generated: {raw_timestamp.strftime('%Y-%m-%d %H:%m:%S %Z')}",
-                f"Source database: {db_uri}",
-                f"No. samples: {get_n_samples(data)}",
-                f"No. models: {get_n_models(data)}",
-                f"No. tasks: {get_n_tasks(data)}",
+                f"Report generated: `{raw_timestamp.strftime('%Y-%m-%d %H:%m:%S %Z')}`",
+                f"Source database: `{db_uri}`",
+                f"No. samples: `{get_n_samples(data)}`",
+                f"No. models: `{get_n_models(data)}`",
+                f"No. tasks: `{get_n_tasks(data)}`",
             ]
         )
         md_lines.extend(get_plots(data, temp_dir))

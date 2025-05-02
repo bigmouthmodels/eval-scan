@@ -18,7 +18,10 @@ pip install TODO
 
 ## Use
 
-**1. Index**: Index your evaluation logs with `evaldb`.
+**1. Index**: Index your evaluation logs with `evaldb`. You can do this via `evalscan` with
+```
+evalscan index --log-dir <log directory>
+```
 
 **2. Scan**: Scan your evaluation results with the default probe library:
 ```

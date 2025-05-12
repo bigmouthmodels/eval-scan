@@ -30,4 +30,4 @@ evaldb = { git = "ssh://git@github.com/AI-Safety-Institute/proto_evaldb.git" }
 [project.scripts]
 # This creates a command called "your-command" that calls the "main" function 
 # from the "your_package.cli" module
-evalscan = "evalscan.cli:main"
+evalscan = "evalscan.cli:evalscan"

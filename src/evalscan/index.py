@@ -4,6 +4,8 @@ from uuid import uuid4
 import duckdb
 
 
+
+
 def load_data(db_uri: str):
     # inspect-evaldb --log_dir /home/ubuntu/los-alamos/logs/cybench-100 --db_uri cybench-10-t0.db --hide_manual
     con = duckdb.connect(db_uri)

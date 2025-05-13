@@ -83,13 +83,16 @@ def report(db_uri):
     start_time = time()
     con = duckdb.connect(db_uri)
     evals_df = (
-        con.execute("SELECT * FROM evals").df().sort_values(by="created").reset_index()
+        con.execute("SELECT * FROM evals")
+        .df()
+        .sort_values(by="created")
+        .reset_index(drop=True)
     )
     samples_df = (
         con.execute("SELECT * FROM samples")
         .df()
         .sort_values(by=["eval_id", "id", "epoch"])
-        .reset_index()
+        .reset_index(drop=True)
     )
     # messages_df = con.execute("SELECT * FROM messages").df()
 

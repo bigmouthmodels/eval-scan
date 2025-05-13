@@ -111,15 +111,15 @@ def report(db_uri):
 
         md_lines.extend(
             [
-                "<details><summary>## Raw log headers</summary>",
-                evals_df.to_markdown(),
+                "<details><summary>Logs</summary>",
+                evals_df.drop(["dataset_sample_ids"], axis=1).to_markdown(),
                 "</details>",
             ]
         )
         md_lines.extend(
             [
-                "<details><summary>## Raw sample headers</summary>",
-                samples_df.to_markdown(),
+                "<details><summary>Samples</summary>",
+                samples_df.drop(["input", "target"], axis=1).to_markdown(),
                 "</details>",
             ]
         )

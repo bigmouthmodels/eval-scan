@@ -34,6 +34,4 @@ dev = [
 ]
 
 [project.scripts]
-# This creates a command called "your-command" that calls the "main" function 
-# from the "your_package.cli" module
 evalscan = "evalscan.cli:evalscan"

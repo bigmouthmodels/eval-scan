@@ -5,12 +5,12 @@ import shutil
 import tempfile
 from time import time
 
+import duckdb
 from faker import Faker
 import humanize
 import pytz
 import pandas as pd
 
-from evalscan.index import load_data
 from evalscan.plots import lasagne_stacked_plotly
 
 fake = Faker()
@@ -20,7 +20,7 @@ fn_sample = "tidy_sample_uuid"
 fn_log = "raw_log_uuid"
 fn_model = "model"
 fn_index = "index"
-fn_task_name = "task_name"
+fn_task_name = "id"
 fn_grade = "grade"
 
 
@@ -81,7 +81,10 @@ def get_plots(data: pd.DataFrame, temp_dir: str) -> list[str]:
 
 def report(db_uri):
     start_time = time()
-    data = load_data(db_uri)
+    con = duckdb.connect(db_uri)
+    evals_df = con.execute("SELECT * FROM evals").df()
+    samples_df = con.execute("SELECT * FROM samples").df()
+    # messages_df = con.execute("SELECT * FROM messages").df()
 
     with tempfile.TemporaryDirectory() as temp_dir:  # Use a temp dir to handle cleanup
         raw_timestamp = datetime.now(pytz.UTC)
@@ -94,14 +97,33 @@ def report(db_uri):
                 "---",
                 "> [!WARNING]\n> EvalScan is a new tool that is being actively developed. It hasn't been comprehensively tested, so you should interpret results cautiously."
                 "",
-                f"Report generated: `{raw_timestamp.strftime('%Y-%m-%d %H:%m:%S %Z')}`",
-                f"Source database: `{db_uri}`",
-                f"No. samples: `{get_n_samples(data)}`",
-                f"No. models: `{get_n_models(data)}`",
-                f"No. tasks: `{get_n_tasks(data)}`",
             ]
         )
-        md_lines.extend(get_plots(data, temp_dir))
+
+        report_metadata_df = pd.Series(
+            {
+                "Report generated": raw_timestamp.strftime("%Y-%m-%d %H:%m:%S %Z"),
+                "Source database": db_uri,
+            },
+            name="Report metadata",
+        )
+        md_lines.append(report_metadata_df.to_markdown())
+
+        md_lines.extend(
+            [
+                "<details><summary>## Raw log headers</summary>",
+                evals_df.to_markdown(),
+                "</details>",
+            ]
+        )
+        md_lines.extend(
+            [
+                "<details><summary>## Raw sample headers</summary>",
+                samples_df.to_markdown(),
+                "</details>",
+            ]
+        )
+        # md_lines.extend(get_plots(data, temp_dir))
 
         compile_time = timedelta(seconds=time() - start_time)
         md_lines.append("---")

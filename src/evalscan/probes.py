@@ -8,7 +8,7 @@ from inspect_ai.model import GenerateConfig, get_model
 import pandas as pd
 from tqdm.asyncio import tqdm_asyncio
 
-from random import uniform
+from random import uniform as _uniform
 
 
 def apply_async(df, async_fn) -> pd.Series:
@@ -20,7 +20,7 @@ def apply_async(df, async_fn) -> pd.Series:
     return pd.Series(results, index=df.index)
 
 
-def dummy_probe(df: pd.DataFrame, con: duckdb.DuckDBPyConnection):
+def uniform(df: pd.DataFrame, con: duckdb.DuckDBPyConnection):
     # df is tidy messages df
     score_name = "dummy_scorer"
 
@@ -28,7 +28,7 @@ def dummy_probe(df: pd.DataFrame, con: duckdb.DuckDBPyConnection):
         await asyncio.sleep(0.01)
         uuid = uuid4()
         message_uuid = row["uuid"]
-        score = uniform(0, 1)
+        score = _uniform(0, 1)
         inserted = datetime.now(timezone.utc)
         input_tokens = 0
         output_tokens = 0

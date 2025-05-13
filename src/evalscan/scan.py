@@ -1,13 +1,13 @@
 import duckdb
 
-from evalscan.probes import dummy_probe
+from evalscan.probes import uniform
 
 # uv run evalscan index --logs-dir /home/ubuntu/eval-scan/tests/assets/cybench-100 --db-uri cybench-100.db
 # uv run evalscan scan --db-uri /home/ubuntu/eval-scan/cybench-100.db
 # uvx harlequin cybench-100.db
 
 # Probes
-PROBES = [dummy_probe]
+PROBES = [uniform]
 
 
 def scan(db_uri):

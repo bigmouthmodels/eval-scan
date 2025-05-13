@@ -82,8 +82,15 @@ def get_plots(data: pd.DataFrame, temp_dir: str) -> list[str]:
 def report(db_uri):
     start_time = time()
     con = duckdb.connect(db_uri)
-    evals_df = con.execute("SELECT * FROM evals").df()
-    samples_df = con.execute("SELECT * FROM samples").df()
+    evals_df = (
+        con.execute("SELECT * FROM evals").df().sort_values(by="created").reset_index()
+    )
+    samples_df = (
+        con.execute("SELECT * FROM samples")
+        .df()
+        .sort_values(by=["eval_id", "id", "epoch"])
+        .reset_index()
+    )
     # messages_df = con.execute("SELECT * FROM messages").df()
 
     with tempfile.TemporaryDirectory() as temp_dir:  # Use a temp dir to handle cleanup
@@ -111,14 +118,14 @@ def report(db_uri):
 
         md_lines.extend(
             [
-                "<details><summary>Logs</summary>",
+                "<details><summary>Logs</summary>\n",
                 evals_df.drop(["dataset_sample_ids"], axis=1).to_markdown(),
                 "</details>",
             ]
         )
         md_lines.extend(
             [
-                "<details><summary>Samples</summary>",
+                "<details><summary>Samples</summary>\n",
                 samples_df.drop(["input", "target"], axis=1).to_markdown(),
                 "</details>",
             ]

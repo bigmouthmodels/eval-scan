@@ -8,9 +8,7 @@ from inspect_ai.model import GenerateConfig, get_model
 import pandas as pd
 from tqdm.asyncio import tqdm_asyncio
 
-from faker import Faker
-
-fake = Faker()
+from random import uniform
 
 
 def apply_async(df, async_fn) -> pd.Series:
@@ -30,7 +28,7 @@ def dummy_probe(df: pd.DataFrame, con: duckdb.DuckDBPyConnection):
         await asyncio.sleep(0.01)
         uuid = uuid4()
         message_uuid = row["uuid"]
-        score = fake.words()
+        score = uniform(0, 1)
         inserted = datetime.now(timezone.utc)
         input_tokens = 0
         output_tokens = 0

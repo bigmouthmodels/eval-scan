@@ -30,6 +30,7 @@ evaldb = { git = "ssh://git@github.com/AI-Safety-Institute/proto_evaldb.git" }
 [dependency-groups]
 dev = [
     "pre-commit>=4.2.0",
+    "pytest>=8.3.5",
 ]
 
 [project.scripts]

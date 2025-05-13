@@ -27,6 +27,11 @@ inspect-evals = { git = "https://github.com/UKGovernmentBEIS/inspect_evals" }
 aisitools = { git = "ssh://git@github.com/AI-Safety-Institute/aisi-inspect-tools.git" }
 evaldb = { git = "ssh://git@github.com/AI-Safety-Institute/proto_evaldb.git" }
 
+[dependency-groups]
+dev = [
+    "pre-commit>=4.2.0",
+]
+
 [project.scripts]
 # This creates a command called "your-command" that calls the "main" function 
 # from the "your_package.cli" module
